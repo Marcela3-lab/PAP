@@ -1,0 +1,2 @@
+C:/PAP/Me_Time/android/app/.cxx/RelWithDebInfo/4r5t5c2h/x86/CMakeFiles/edit_cache.dir
+C:/PAP/Me_Time/android/app/.cxx/RelWithDebInfo/4r5t5c2h/x86/CMakeFiles/rebuild_cache.dir
