@@ -185,7 +185,7 @@ Widget obj3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "🏷️ Por importância:\nUse notas maiores para objetivos mais urgentes\n🧩 Por relação entre objetivos:\nPor exemplo, usar a mesma cor para objetivos de determinadas categorias\n🎯 Por associação de conteúdo com cor (em casos de estudo):\nExemplo: 'Todos os objetivos verdes são relacionados á um tópico especifico da disciplina de história' ",
+              "🏷️ Importância:\nUse notas maiores para objetivos mais urgentes\n🧩 Categoria dos objetivos:\ Exemplo, usar a mesma cor para objetivos de determinadas categorias\n🎯 Associação de conteúdo pela cor:\nExemplo: 'Todos os objetivos verdes são relacionados á um tópico especifico da disciplina de história' ",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),

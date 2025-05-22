@@ -17,7 +17,7 @@ class ProgressoProvider extends ChangeNotifier {
     if (idUsuario == null) return;
 
     final url =
-        Uri.parse("http://192.168.1.29/dropdown.php?id_user=$idUsuario");
+        Uri.parse("http://192.168.1.187/dropdown.php?id_user=$idUsuario");
     final response = await http.get(url);
 
     if (response.statusCode == 200 && response.body.isNotEmpty) {

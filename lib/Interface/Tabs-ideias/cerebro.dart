@@ -185,7 +185,7 @@ Widget cerebro3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "A dopamina é o “neurotransmissor da motivação”. Quando você cumpre uma meta ou vê progresso, seu cérebro libera dopamina, te deixando mais animado.\n Por isso é importante dividir grandes metas em pequenas tarefas visíveis.\n\nDica: Use seu progresso no app como incentivo! Cada objetivo concluída ativa seu sistema de recompensa natural.",
+              "A dopamina é o “neurotransmissor da motivação”. Quando você cumpre um objetivo ou vê progresso, seu cérebro libera dopamina, te deixando mais animado.\nPor isso é importante dividir grandes objetivos em pequenas tarefas visíveis.\n\nDica: Use seu progresso no app como incentivo! Cada objetivo concluído ativa seu sistema de recompensa natural.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),

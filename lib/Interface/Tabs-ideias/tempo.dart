@@ -118,7 +118,7 @@ Widget tempo2(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "O cérebro gasta mais energia com tarefas difíceis. Se você deixar o mais difícil pro final do dia, vai se sentir mais cansado e propenso a desistir. Estudar o mais importante primeiro economiza energia mental.\n\nDica: Escolha 1 ou 2 tarefas principais para o dia. Se fizer só isso, já terá feito o essencial. Lembre-se de olhar a home para ver um resumo do seu dia.",
+              "O cérebro gasta mais energia com tarefas difíceis. Se você deixar o mais difícil pro final do dia, vai se sentir mais cansado e propenso a desistir. Estudar o mais importante primeiro economiza energia mental.\n\nDica: Defina 1 ou 2 objetivos principais para o dia. Se fizer só isso, já terá feito o essencial. Lembre-se de olhar a home para ver um resumo do seu dia.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),

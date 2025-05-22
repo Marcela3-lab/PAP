@@ -35,7 +35,7 @@ class Sairprovider extends ChangeNotifier {
     print('ID do user a ser apagado: $idUsuario');
     bool dados;
 
-    final url = Uri.parse("http://192.168.1.29/sair.php?id_user=$idUsuario");
+    final url = Uri.parse("http://192.168.1.187/sair.php?id_user=$idUsuario");
     final response = await http.get(url);
 
     print("body: ${response.body}");

@@ -14,7 +14,7 @@ class TarefaspendentesProvider extends ChangeNotifier {
     print("id_user container1: $iduser");
 
     final String url =
-        "http://192.168.1.29/Tarefaspendentes.php?id_user=$iduser";
+        "http://192.168.1.187/Tarefaspendentes.php?id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
 

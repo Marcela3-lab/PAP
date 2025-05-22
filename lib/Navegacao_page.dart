@@ -6,6 +6,7 @@ import 'package:learn_logs/Interface/Home_page.dart';
 import 'package:learn_logs/Interface/objetivos_page.dart';
 
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:learn_logs/Provider/SairSH_provider.dart';
 import 'package:learn_logs/Provider/sairprovider.dart';
 import 'package:learn_logs/main.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class _NavegacaoState extends State<Navegacao> {
 
   Future<void> _carregarDados() async {
     final prefs = await SharedPreferences.getInstance();
-    final nome = prefs.getString('nomeUser') ?? "Utilizador";
+    final nome = prefs.getString('nome') ?? "Utilizador";
 
     setState(() {
       nome;
@@ -86,7 +87,7 @@ class _NavegacaoState extends State<Navegacao> {
               )),
           ListTile(
               leading: const Icon(
-                Icons.exit_to_app,
+                Icons.delete_sweep_sharp,
               ),
               iconColor: Color.fromRGBO(94, 7, 145, 1),
               title: const Text('Apagar Conta'),
@@ -108,11 +109,26 @@ class _NavegacaoState extends State<Navegacao> {
             iconColor: Color.fromRGBO(94, 7, 145, 1),
             title: Text('Minha Conta'),
             onTap: () {
-              Navigator.pushAndRemoveUntil(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Telaconta()),
-                (Route<dynamic> route) => false,
               );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            iconColor: Color.fromRGBO(94, 7, 145, 1),
+            title: Text('Sair'),
+            onTap: () async {
+              final conf =
+                  await Provider.of<SairshProvider>(context, listen: false)
+                      .dadoslocais();
+              if (conf) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Tela_Principal()),
+                    (Route<dynamic> route) => false);
+              }
             },
           ),
         ],

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:learn_logs/Interface/Home_page.dart';
+import 'package:learn_logs/Navegacao_page.dart';
+import 'package:learn_logs/Provider/retornardados_provider.dart';
+import 'package:learn_logs/Provider/verificaruser.dart';
 import 'package:provider/provider.dart';
 import 'package:learn_logs/Interface/utilizador_logado_page.dart';
 import 'package:learn_logs/Provider/utilizador_semlogin_provider.dart';
@@ -7,16 +11,23 @@ import 'package:email_validator/email_validator.dart';
 //Função principal pra inicial o aplicativo, que no caso se chama MyApp
 
 //Define uma classe
-class UtilizadorSemlogin extends StatelessWidget {
+class UtilizadorSemlogin extends StatefulWidget {
   const UtilizadorSemlogin({super.key});
 
   @override
+  State<UtilizadorSemlogin> createState() => UtilizadorSemloginState();
+}
+
+class UtilizadorSemloginState extends State<UtilizadorSemlogin> {
+  final formchave = GlobalKey<FormState>();
+
+  @override
   Widget build(BuildContext context) {
-    final formchave = GlobalKey<FormState>();
     final TextEditingController nome = TextEditingController();
     final TextEditingController email = TextEditingController();
     final TextEditingController senha = TextEditingController();
-
+    double largura = MediaQuery.of(context).size.width;
+    double altura = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: const Color.fromARGB(246, 255, 238, 212),
         body: SingleChildScrollView(
@@ -28,23 +39,22 @@ class UtilizadorSemlogin extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 140,
+                    height: 150,
                   ),
                   const Text("Criar Conta",
                       style: TextStyle(
                         fontSize: 30,
-                        fontFamily: "Raleway",
                         color: const Color.fromARGB(255, 143, 33, 134),
                         letterSpacing: 1.5,
                       )),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
                   const Text("Digite seus dados para criar sua conta",
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 143, 33, 134),
                         letterSpacing: 1.5,
                       )),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 50),
 
                   //--nome
                   TextFormField(
@@ -129,65 +139,84 @@ class UtilizadorSemlogin extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 50),
-
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 143, 33, 134),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 143),
-                    ),
-                    onPressed: () {
-                      if (formchave.currentState!.validate()) {
-                        if (nome.text != "" &&
-                            email.text != "" &&
-                            senha.text != "") {
-                          Provider.of<UtilizadorSemloginProvider>(context,
-                                  listen: false)
-                              .enviarDados(
-                                  nome.text, email.text, senha.text, context);
-                        }
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                  title: Text('Erro'),
-                                  content: Text(
-                                      'Preencha todos os campos com dados corretos'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pop(); // Fecha o dialog
-                                      },
-                                      child: Text('Fechar'),
-                                    ),
-                                  ]);
-                            });
-                      }
-                    },
-                    child: const Text("Criar Conta"),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  ElevatedButton(
+                  SizedBox(
+                    width: largura * 0.9,
+                    child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             const Color.fromARGB(255, 143, 33, 134),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 130),
+                          vertical: 15,
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const Utilizadorlogado()),
-                          (Route<dynamic> route) => false,
-                        );
+                      onPressed: () async {
+                        if (formchave.currentState!.validate()) {
+                          final dados = await Provider.of<Verificaruser>(
+                                  context,
+                                  listen: false)
+                              .buscarnome(context, nome.text);
+                          if (dados == true) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      title: Text('Nome Inválido'),
+                                      content: Text(
+                                          'Este nome de utilizador já existe'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Fecha o dialog
+                                          },
+                                          child: Text('Fechar'),
+                                        ),
+                                      ]);
+                                });
+                            return;
+                          } else {
+                            await Provider.of<UtilizadorSemloginProvider>(
+                                    context,
+                                    listen: false)
+                                .enviarDados(
+                                    nome.text.trim(),
+                                    email.text.trim(),
+                                    senha.text.trim(),
+                                    context);
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) => Navegacao(
+                                indiceInicial: 2,
+                              ),
+                            ));
+                          }
+                        }
                       },
-                      child: const Text("Acessar Conta"))
+                      child: const Text("Criar Conta"),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  SizedBox(
+                      width: largura * 0.9,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 143, 33, 134),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const Utilizadorlogado()),
+                              (Route<dynamic> route) => false,
+                            );
+                          },
+                          child: const Text("Iniciar Sessão"))),
                 ],
               ),
             ),

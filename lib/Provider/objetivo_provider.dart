@@ -10,7 +10,7 @@ class ObjetivoProvider extends ChangeNotifier {
   // Função para buscar dados do servidor
   Future<void> deletarObjetivo(id_objetivo) async {
     final response = await http.post(
-      Uri.parse('http://192.168.1.29/deletar_objetivos.php'),
+      Uri.parse('http://192.168.1.187/deletar_objetivos.php'),
       body: {'id_objetivo': id_objetivo.toString()},
     );
     if (response.statusCode == 200) {
@@ -28,7 +28,7 @@ class ObjetivoProvider extends ChangeNotifier {
     int? idUser = prefs.getInt('id');
 
     final String url =
-        "http://192.168.1.29/buscar_objetivos.php?id_user=$idUser";
+        "http://192.168.1.187/buscar_objetivos.php?id_user=$idUser";
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {

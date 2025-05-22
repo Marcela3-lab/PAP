@@ -13,7 +13,7 @@ class CalendarioProvider extends ChangeNotifier {
     int? iduser = prefs.getInt('id');
 
     final String url =
-        "http://192.168.1.29/buscar_eventos.php?dia=$dia&id_user=$iduser";
+        "http://192.168.1.187/buscar_eventos.php?dia=$dia&id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {

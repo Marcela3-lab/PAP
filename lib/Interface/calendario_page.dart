@@ -95,12 +95,10 @@ class _CalendarioState extends State<Calendario> {
                 onPressed: () async {
                   print("Há um erro muito grande aqui! $formattedDate");
 
-                  final resultado =
-                      await Navigator.of(context).pushAndRemoveUntil(
+                  final resultado = await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => PAgenda(nome: formattedDate!),
                     ),
-                    (Route<dynamic> route) => false,
                   );
                   if (resultado == true) {
                     Provider.of<CalendarioProvider>(context, listen: false)

@@ -13,7 +13,7 @@ class Nprogressosprovider extends ChangeNotifier {
     int? iduser = prefs.getInt('id');
     print("id_user container4: $iduser");
 
-    final String url = "http://192.168.1.29/Progressodia.php?id_user=$iduser";
+    final String url = "http://192.168.1.187/Progressodia.php?id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
 
@@ -34,17 +34,5 @@ class Nprogressosprovider extends ChangeNotifier {
       print("Erro de conexão: $e");
     }
     return 9;
-  }
-
-  void verificarSharedPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    // Pega todos os dados salvos
-    Set<String> keys = prefs.getKeys();
-
-    for (String key in keys) {
-      var value = prefs.get(key);
-      print('Chave: $key => Valor: $value');
-    }
   }
 }

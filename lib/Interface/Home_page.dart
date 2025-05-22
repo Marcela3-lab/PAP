@@ -236,16 +236,16 @@ class HomeState extends State<Home> {
         ),
         const SizedBox(height: 10),
         Nome(nomeprefs),
-        const SizedBox(height: 10),
+        const SizedBox(height: 1),
         Text(
-          ' Vamos começar o seu dia?',
+          ' Um dia produtivo começa com um bom plano.',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[600],
           ),
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 48),
 
         //CONTAINER 1
 

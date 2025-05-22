@@ -9,6 +9,7 @@ import 'package:learn_logs/Provider/Home-containersProvider/Nobjetivos.dart';
 import 'package:learn_logs/Provider/Home-containersProvider/Progressodia.dart';
 import 'package:learn_logs/Provider/Home-containersProvider/Tarefas_feitas.dart';
 import 'package:learn_logs/Provider/Home-containersProvider/Tarefaspendentes.dart';
+import 'package:learn_logs/Provider/SairSH_provider.dart';
 import 'package:learn_logs/Provider/buscarprogresso_provider.dart';
 import 'package:learn_logs/Provider/dropdown_progressoprovider.dart';
 import 'package:learn_logs/Provider/calendario_provider.dart';
@@ -17,6 +18,7 @@ import 'package:learn_logs/Provider/retornardados_provider.dart';
 import 'package:learn_logs/Provider/sairprovider.dart';
 import 'package:learn_logs/Provider/utilizador_semlogin_provider.dart';
 import 'package:learn_logs/Provider/utilizador_logado_provider.dart';
+import 'package:learn_logs/Provider/verificaruser.dart';
 import 'package:learn_logs/checklogin.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,6 +43,8 @@ Future<void> main() async {
     ChangeNotifierProvider(create: (_) => Nprogressosprovider()),
     ChangeNotifierProvider(create: (_) => Sairprovider()),
     ChangeNotifierProvider(create: (_) => RetornardadosProvider()),
+    ChangeNotifierProvider(create: (_) => Verificaruser()),
+    ChangeNotifierProvider(create: (_) => SairshProvider()),
   ], child: const MyApp()));
 }
 
@@ -52,16 +56,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
-        brightness: Brightness.light,
-        textTheme: GoogleFonts.baloo2TextTheme(),
+        fontFamily: 'ConcertOne',
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        textTheme: GoogleFonts.baloo2TextTheme(),
-      ),
+      debugShowCheckedModeBanner: false,
       home: const Checklogin(),
     );
   }
@@ -75,9 +73,10 @@ class Tela_Principal extends StatefulWidget {
 }
 
 class _Tela_PrincipalState extends State<Tela_Principal> {
-  bool darkMode = false;
-
   Widget build(BuildContext context) {
+    double largura = MediaQuery.of(context).size.width;
+    double altura = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Center(
@@ -109,45 +108,53 @@ class _Tela_PrincipalState extends State<Tela_Principal> {
               scale: 1.0,
             ),
             const SizedBox(height: 80),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 143, 33, 134),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 152)),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const UtilizadorSemlogin()),
-                  );
-                  style:
-                  ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(1),
-                    ),
-                  );
-                },
-                child: const Text("Criar conta")),
+            SizedBox(
+              width: largura * 0.9,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 143, 33, 134),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 15,
+                      )),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => const UtilizadorSemlogin()),
+                    );
+                    style:
+                    ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1),
+                      ),
+                    );
+                  },
+                  child: const Text("Criar conta")),
+            ),
             const SizedBox(height: 30),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 241, 184, 97),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 140)),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const Utilizadorlogado()),
-                  );
-                  style:
-                  ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
-                    ),
-                  );
-                },
-                child: const Text("Acessar Conta")),
+            SizedBox(
+              width: largura * 0.9,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 241, 184, 97),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 15,
+                      )),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => const Utilizadorlogado()),
+                    );
+                    style:
+                    ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    );
+                  },
+                  child: const Text("Inciar Sessão")),
+            ),
             const SizedBox(
               height: 20,
             ),

@@ -185,7 +185,7 @@ Widget estudo3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "1️⃣: Atribua cores a conceitos ou categorias\n2️⃣: Adicione o conteúdo que prescisas lembrar\n3️⃣Tente memorizar o conteúdo com base na cor\n4️⃣: Dica: Utilize a descricão dos objetivo para adicionar o conteudo\n5️⃣: Dica: Defina o titulo e a cor\n6️⃣:Clique na caixa de diálogo do objetivo sempre que quiser lembrar o conteúdo ou altera-lo",
+              "1️⃣: Atribua cores a conceitos ou categorias\n2️⃣: Adicione o conteúdo que prescisas lembrar\n3️⃣Tente memorizar o conteúdo com base na cor\n4️⃣: Dica: Utilize a descricão dos objetivo para adicionar o conteudo\n5️⃣: Dica: Defina o titulo e a cor\n6️⃣:Clique na caixa de diálogo do objetivo sempre que quiser lembrar o conteúdo",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),

@@ -65,10 +65,11 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
     tipo,
     cor,
   ) async {
+    final currentContext = context;
     final prefs = await SharedPreferences.getInstance();
     int? iduser = prefs.getInt('id');
 
-    String url = "http://192.168.1.29/objetivos.php";
+    String url = "http://192.168.1.187/objetivos.php";
 
     try {
       final response = await http.post(
@@ -90,25 +91,27 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
         if (data["status"] == "sucesso") {
           print(response.body);
         }
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("Sucesso"),
-            content: Text("Tarefa adicionada com sucesso"),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(()),
-                child: Text("Ok"),
-              )
-            ],
-          ),
-        );
+        if (currentContext.mounted) {
+          showDialog(
+            context: currentContext,
+            builder: (context) => AlertDialog(
+              title: Text("Sucesso"),
+              content: Text("objetivo adicionado com sucesso"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(()),
+                  child: Text("Ok"),
+                )
+              ],
+            ),
+          );
+        }
       } else {
         showDialog(
-          context: context,
+          context: currentContext,
           builder: (context) => AlertDialog(
             title: Text("Erro"),
-            content: Text("Erro ao adicionar tarefa ${response.statusCode}"),
+            content: Text("Erro ao adicionar objetivo ${response.statusCode}"),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -122,19 +125,21 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
     } catch (e, stackTrace) {
       print("Erro: $e");
       print("StackTrace: $stackTrace");
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Erro"),
-          content: Text("Não foi possível conectar ao servidor. $e "),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Ok"),
-            )
-          ],
-        ),
-      );
+      if (currentContext.mounted) {
+        showDialog(
+          context: currentContext,
+          builder: (context) => AlertDialog(
+            title: const Text("Erro"),
+            content: Text("Não foi possível conectar ao servidor. $e "),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Ok"),
+              )
+            ],
+          ),
+        );
+      }
     }
   }
 }

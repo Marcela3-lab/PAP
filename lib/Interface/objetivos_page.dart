@@ -193,12 +193,11 @@ class _ObjetivosState extends State<Objetivos> {
                       borderRadius: BorderRadius.circular(10),
                     )),
                 onPressed: () async {
-                  final novo = await Navigator.pushAndRemoveUntil(
+                  final novo = await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const PObjetivo(),
                     ),
-                    (Route<dynamic> route) => false,
                   );
                 },
                 child: const Text('Adicionar Objetivo'),

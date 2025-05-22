@@ -113,7 +113,7 @@ class AdicionartarefaProvider extends ChangeNotifier {
     String dataexemplo = "2024-01-01";
     String inicioexemplo = "$dataexemplo $inicio";
     String fimexemplo = "$dataexemplo $fim";
-    const String url = "http://192.168.1.29/agenda.php";
+    const String url = "http://192.168.1.187/agenda.php";
     final prefs = await SharedPreferences.getInstance();
     int? idUser = prefs.getInt('id');
 
@@ -192,7 +192,7 @@ class AdicionartarefaProvider extends ChangeNotifier {
   }
 
   Future estado(bool concluida, int idAgenda) async {
-    final String url = "http://192.168.1.29/tarefaconcluida.php";
+    final String url = "http://192.168.1.187/tarefaconcluida.php";
 
     try {
       final response = await http.post(Uri.parse(url), body: {
@@ -210,7 +210,7 @@ class AdicionartarefaProvider extends ChangeNotifier {
 
   Future<void> deletartarefa(id_tarefa) async {
     final response = await http.post(
-      Uri.parse('http://192.168.1.29/deletar_tarefas.php'),
+      Uri.parse('http://192.168.1.187/deletar_tarefas.php'),
       body: {'id_agenda': id_tarefa.toString()},
     );
     if (response.statusCode == 200) {

@@ -8,7 +8,7 @@ class UtilizadorSemloginProvider extends ChangeNotifier {
 //1º funcao que envia os dados pra base de dados
   Future<void> enviarDados(
       nome, String email, String senha, BuildContext context) async {
-    const String url = "http://192.168.1.29/index.php";
+    const String url = "http://192.168.1.187/index.php";
 
     try {
       final response = await http.post(
@@ -25,7 +25,6 @@ class UtilizadorSemloginProvider extends ChangeNotifier {
         var dadosUser = jsonDecode(response.body);
         if (dadosUser["sucesso"]) {
           int idUser = int.parse(dadosUser['id_user'].toString());
-          // Salvando os dados localmente
           final SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('nome', nome);
           await prefs.setInt('id', idUser);
@@ -33,14 +32,6 @@ class UtilizadorSemloginProvider extends ChangeNotifier {
           print("Dados salvos no SharedPreferences:");
           print("Nome salvo: ${prefs.getString('nome')}");
           print("ID Salvo: ${prefs.getInt('id')}");
-
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => Navegacao(
-                indiceInicial: 2,
-              ),
-            ),
-          );
         } else {
           print(response.body);
           showDialog(
@@ -56,6 +47,7 @@ class UtilizadorSemloginProvider extends ChangeNotifier {
               ],
             ),
           );
+          notifyListeners();
         }
       } else {
         showDialog(

@@ -68,7 +68,10 @@ flutter_launcher_icons:
 flutter:
   assets:
     - assets/imagens/img.png
-    
+  fonts:
+    - family: ConcertOne
+      fonts:
+        - asset: assets/fonts/ConcertOne-Regular.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

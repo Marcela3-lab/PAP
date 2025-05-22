@@ -13,7 +13,7 @@ class Nobjetivos extends ChangeNotifier {
     int? iduser = prefs.getInt('id');
     print("id_user container3: $iduser");
 
-    final String url = "http://192.168.1.29/Nobjetivos.php?id_user=$iduser";
+    final String url = "http://192.168.1.187/Nobjetivos.php?id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
 

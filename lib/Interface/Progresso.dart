@@ -155,7 +155,7 @@ class _ProgressoState extends State<Progresso> {
                             const InputDecoration(hintText: 'horas/minutos'),
                       ),
                       const SizedBox(height: 20),
-                      Text("Meta: ${objetivo['meta']} ${objetivo['tipo']}",
+                      Text("Duração: ${objetivo['meta']} ${objetivo['tipo']}",
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       LinearProgressIndicator(
@@ -334,11 +334,11 @@ class _ProgressoState extends State<Progresso> {
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   ),
                   onPressed: () {
-                    Navigator.pushAndRemoveUntil(
+                    print("clicou no psuh");
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const VizualizarProgresso()),
-                      (Route<dynamic> route) => false,
                     );
                   },
                   child: Text("Progressos"))

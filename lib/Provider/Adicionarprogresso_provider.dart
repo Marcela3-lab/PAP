@@ -15,7 +15,7 @@ class AdicionarProgressoProvider extends ChangeNotifier {
     String tipometa,
     String dia,
   ) async {
-    const String url = "http://192.168.1.29/Adicionar_progresso.php";
+    const String url = "http://192.168.1.187/Adicionar_progresso.php";
     final prefs = await SharedPreferences.getInstance();
     int? iduser = prefs.getInt('id');
     print('Enviando progresso...');
@@ -49,7 +49,7 @@ class AdicionarProgressoProvider extends ChangeNotifier {
           context: context,
           builder: (context) => AlertDialog(
             title: Text("Sucesso"),
-            content: Text("Tarefa adicionada com sucesso"),
+            content: Text("Seu progresso foi adicionada com sucesso"),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(()),
@@ -63,7 +63,7 @@ class AdicionarProgressoProvider extends ChangeNotifier {
           context: context,
           builder: (context) => AlertDialog(
             title: Text("Erro"),
-            content: Text("Erro ao adicionar tarefa ${response.statusCode}"),
+            content: Text("Erro ao adicionar progresso ${response.statusCode}"),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),

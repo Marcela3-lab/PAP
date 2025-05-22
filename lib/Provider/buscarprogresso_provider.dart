@@ -13,13 +13,17 @@ class BuscarprogressoProvider extends ChangeNotifier {
     int? iduser = prefs.getInt('id');
 
     final String url =
-        "http://192.168.1.29/buscar_progresso.php?dia=$dia&id_user=$iduser";
+        "http://192.168.1.187/buscar_progresso.php?dia=$dia&id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
+        if (response.body.isEmpty) {
+          print("Resposta vazia, nada para decodificar");
+          return [];
+        }
+        List<dynamic> dados = json.decode(response.body);
         print('Body recebido: ${response.body}');
 
-        List<dynamic> dados = json.decode(response.body);
         return List<Map<String, dynamic>>.from(dados);
       } else {
         print("Erro no servidor: ${response.statusCode}");
