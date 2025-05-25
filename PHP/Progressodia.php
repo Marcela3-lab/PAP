@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     $iduser = mysqli_real_escape_string($conexao, $_GET['id_user']);
     
 
-$sql = "SELECT COUNT(*) AS progresso FROM progresso where dia = CURDATE()" ;
+$sql = "SELECT COUNT(*) AS progresso FROM progresso where dia = CURDATE()  and id_user='$iduser'" ;
     $resultado = mysqli_query($conexao, $sql);
         $dados=[];
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//1------------------------------------------------------------------------
 Widget cerebro1(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -15,7 +14,7 @@ Widget cerebro1(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -51,7 +50,7 @@ Widget cerebro1(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "O cérebro aprende com repetição e prática ativa. Quanto mais você tenta lembrar (sem olhar), mais forte fica a memória.\nTécnicas como revisão espaçada e ensinar alguém são formas de ativar o cérebro e reforçar conexões\n\nDica: Não estude só lendo! Pratique explicando em voz alta, escrevendo ou respondendo perguntas",
+              "O cérebro aprende com repetição e prática ativa. Quanto mais se pratica a 'técnica do relembrar', mais forte fica a memória.\nTécnicas como revisão espaçada e ensinar alguém são formas de ativar o cérebro e reforçar conexões.\n\nDica: Não estude só lendo! Pratique, explicando em voz alta, escrevendo ou respondendo a perguntas.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -67,7 +66,6 @@ Widget cerebro1(BuildContext context) {
   );
 }
 
-//2-----------------------------------------------------------------------------------
 Widget cerebro2(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -82,7 +80,7 @@ Widget cerebro2(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -118,7 +116,7 @@ Widget cerebro2(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Enquanto você dorme, o cérebro reorganiza e armazena o que aprendeu. Quando estudamos com sono o cansaço e a dificuldade de raciocínio, assim como os lapsos de memória.\n O ideal é dormir bem e evitar estudar até tarde da noite.\n\nDica: Faça uma revisão leve antes de dormir — seu cérebro vai consolidar isso enquanto você descansa.",
+              "Enquanto se dorme, o cérebro reorganiza e armazena o que aprendeu. Quando estudamos com sono e/ou cansaço podem surgir dificuldades de raciocínio, assim como lapsos de memória.\nO ideal é dormir bem e evitar estudar durante a noite.\n\nDica: Faça uma breve revisão antes de dormir — o cérebro vai consolidar as aprendizagens durante o sono.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -134,7 +132,6 @@ Widget cerebro2(BuildContext context) {
   );
 }
 
-//3-------------------------------------------------------------------------------------
 Widget cerebro3(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -149,7 +146,7 @@ Widget cerebro3(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -185,7 +182,7 @@ Widget cerebro3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "A dopamina é o “neurotransmissor da motivação”. Quando você cumpre um objetivo ou vê progresso, seu cérebro libera dopamina, te deixando mais animado.\nPor isso é importante dividir grandes objetivos em pequenas tarefas visíveis.\n\nDica: Use seu progresso no app como incentivo! Cada objetivo concluído ativa seu sistema de recompensa natural.",
+              "A dopamina é o “neurotransmissor da motivação”. Quando se cumpre um objetivo ou há um progresso, o seu cérebro liberta dopamina, contribuindo assim para um maior bem-estar.\nPor isso, é importante dividir grandes objetivos em pequenas tarefas visíveis.\n\nDica: Use o seu progresso no app como incentivo! Cada objetivo concluído ativa o seu sistema de recompensa natural.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -202,6 +199,7 @@ Widget cerebro3(BuildContext context) {
 }
 
 class FuncionamentoCerebroTab extends StatelessWidget {
+  const FuncionamentoCerebroTab({super.key});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

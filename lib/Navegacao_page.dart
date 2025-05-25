@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:learn_logs/Interface/Progresso.dart';
 import 'package:learn_logs/Interface/calendario_page.dart';
 import 'package:learn_logs/Interface/sugestoes_page.dart';
-import 'package:learn_logs/Interface/Home_page.dart';
+import 'package:learn_logs/Interface/home_page.dart';
 import 'package:learn_logs/Interface/objetivos_page.dart';
-
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:learn_logs/Provider/SairSH_provider.dart';
+import 'package:learn_logs/Provider/sairsh_provider.dart';
 import 'package:learn_logs/Provider/sairprovider.dart';
 import 'package:learn_logs/main.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +17,10 @@ class Navegacao extends StatefulWidget {
   const Navegacao({super.key, this.indiceInicial});
 
   @override
-  _NavegacaoState createState() => _NavegacaoState();
+  NavegacaoState createState() => NavegacaoState();
 }
 
-class _NavegacaoState extends State<Navegacao> {
+class NavegacaoState extends State<Navegacao> {
   late int _opcaoselecionada;
   bool dadoscarregado = false;
   late List<Widget> _telas;
@@ -75,7 +74,7 @@ class _NavegacaoState extends State<Navegacao> {
         children: [
           const DrawerHeader(
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 143, 33, 134),
+                color: Color.fromARGB(255, 143, 33, 134),
               ),
               child: Text(
                 'Menu',
@@ -95,13 +94,16 @@ class _NavegacaoState extends State<Navegacao> {
                 final confirmado =
                     await Provider.of<Sairprovider>(context, listen: false)
                         .apagaruser(context);
+
                 if (confirmado == true) {
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.clear();
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                        builder: (context) => const Tela_Principal()),
-                  );
+                  if (context.mounted) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => const TelaPrincipal()),
+                    );
+                  }
                 }
               }),
           ListTile(
@@ -121,13 +123,16 @@ class _NavegacaoState extends State<Navegacao> {
             title: Text('Sair'),
             onTap: () async {
               final conf =
-                  await Provider.of<SairshProvider>(context, listen: false)
+                  await Provider.of<Sairshprovider>(context, listen: false)
                       .dadoslocais();
+
               if (conf) {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => Tela_Principal()),
-                    (Route<dynamic> route) => false);
+                if (context.mounted) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => TelaPrincipal()),
+                      (Route<dynamic> route) => false);
+                }
               }
             },
           ),
@@ -142,7 +147,6 @@ class _NavegacaoState extends State<Navegacao> {
         activeColor: const Color.fromARGB(255, 180, 139, 233),
         initialActiveIndex: _opcaoselecionada,
         onTap: (index) {
-          print('clicou $index');
           setState(() {
             _opcaoselecionada = index;
           });

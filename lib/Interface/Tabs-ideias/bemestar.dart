@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-//1------------------------------------------------------------------------
 Widget bemestar1(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -16,7 +14,7 @@ Widget bemestar1(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -52,7 +50,7 @@ Widget bemestar1(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Quando você está muito ansioso, o cérebro foca no problema, não no conteúdo. Isso atrapalha a memorização e o foco. Fazer pausas, respirar fundo e aceitar seus limites ajuda mais do que forçar.\n\nDica: Se estiver ansioso, faça uma respiração profunda (4 segundos inspirando, 4 segurando, 4 expirando). Repita 3 vezes e só então retome.",
+              "Quando você está muito ansioso, o cérebro foca no problema, não no conteúdo. Isso atrapalha a memorização e o foco. Fazer pausas, respirar fundo e aceitar seus limites ajuda mais do que esforçar-se excessivamente.\n\nDica: Se estiver ansioso, faça uma respiração profunda (4 segundos inspirando, 4 prendendo, 4 expirando). Repita 3 vezes e só então retome.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -68,7 +66,6 @@ Widget bemestar1(BuildContext context) {
   );
 }
 
-//2-----------------------------------------------------------------------------------
 Widget bemestar2(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -83,7 +80,7 @@ Widget bemestar2(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -119,7 +116,7 @@ Widget bemestar2(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "O cérebro precisa de recompensas para manter o esforço. Quando você comemora cada meta concluída, mesmo que pequena, ativa seu sistema de motivação e sente mais vontade de continuar.\n\nDica: Terminou um Pomodoro ou atingiu sua meta? Faça algo que te faça bem — uma música, um lanche, uma pausa feliz.",
+              "O cérebro precisa de recompensas para manter o esforço. Quando você comemora um objetivo concluído, mesmo que pequeno, ativa seu sistema de motivação e sente mais vontade de continuar.\n\nDica: Terminou um Pomodoro ou atingiu seu objetivo? Faça algo que te faça bem — uma música, um lanche, uma pausa feliz.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -135,7 +132,6 @@ Widget bemestar2(BuildContext context) {
   );
 }
 
-//3-------------------------------------------------------------------------------------
 Widget bemestar3(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -150,7 +146,7 @@ Widget bemestar3(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -186,7 +182,7 @@ Widget bemestar3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Cada cérebro tem seu ritmo. Comparar seu progresso com o dos outros causa frustração e bloqueios. O foco deve ser em melhorar em relação a você mesma, não aos outros.\n\nDica: O seu progresso em relação a si mesmo é o que importa",
+              "Cada cérebro tem seu ritmo. Comparar o seu progresso com o dos outros causa frustração e bloqueios. O foco deve ser em melhorar em relação a você mesma, não aos outros.\n\nDica: O seu progresso em relação a si mesmo é o que importa",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -203,6 +199,7 @@ Widget bemestar3(BuildContext context) {
 }
 
 class BemestarTab extends StatelessWidget {
+  const BemestarTab({super.key});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

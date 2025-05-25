@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Interface/Tabs-ideias/bem-estar.dart';
+import 'package:learn_logs/Interface/Tabs-ideias/bemestar.dart';
 import 'package:learn_logs/Interface/Tabs-ideias/cerebro.dart';
 import 'package:learn_logs/Interface/Tabs-ideias/estudo.dart';
 import 'package:learn_logs/Interface/Tabs-ideias/objetivos.dart';
 import 'package:learn_logs/Interface/Tabs-ideias/tempo.dart';
 
 class Sugestoes extends StatefulWidget {
+  const Sugestoes({super.key});
   @override
-  _SugestoesState createState() => _SugestoesState();
+  SugestoesState createState() => SugestoesState();
 }
 
-class _SugestoesState extends State<Sugestoes> {
+class SugestoesState extends State<Sugestoes> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -43,5 +44,3 @@ class _SugestoesState extends State<Sugestoes> {
     );
   }
 }
-
-//----------------------------------------------------------------------

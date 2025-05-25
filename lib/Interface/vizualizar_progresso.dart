@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learn_logs/Provider/buscarprogresso_provider.dart';
-import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../Provider/dropdown_progressoprovider.dart';
 
 class VizualizarProgresso extends StatefulWidget {
   const VizualizarProgresso({super.key});
@@ -27,7 +26,7 @@ Widget comobjetivo(BuildContext context, objetivo, meta, tipometa, feito,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+            color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
             spreadRadius: 2,
             blurRadius: 8,
             offset: Offset(0, 4),
@@ -84,13 +83,14 @@ class _VizualizarProgressoState extends State<VizualizarProgresso> {
   void initState() {
     super.initState();
     _selectedDay ??= DateTime.now();
-    Future.microtask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final progressoProvider =
           Provider.of<BuscarprogressoProvider>(context, listen: false);
       progressoProvider.carregarprogresso(_selectedDay!);
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     final progressoProvider = Provider.of<BuscarprogressoProvider>(context);
     final progresso = progressoProvider.progressos;

@@ -5,7 +5,6 @@ header('Content-Type: application/json');
 $response = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //RECEBER OS DADOS
 
     $titulo = mysqli_real_escape_string($conexao, $_POST['titulo']);
 
@@ -21,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $id_user = mysqli_real_escape_string($conexao, $_POST['id_user']);
     
 
-//MANDAR PRA TABELA
     $sql_objetivo= "INSERT INTO objetivos (titulo, descricao, meta, tipo, cor, id_user) VALUES ( '$titulo','$descricao', '$meta', '$tipo', '$cor', '$id_user')";
 if (mysqli_query($conexao,$sql_objetivo)){
 $response['status'] = 'sucesso';

@@ -7,35 +7,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BuscarprogressoProvider extends ChangeNotifier {
   List<Map<String, dynamic>> progressos = [];
 
-  // Função para buscar dados do servidor
   Future<List<Map<String, dynamic>>> buscarDados(String dia) async {
     final prefs = await SharedPreferences.getInstance();
     int? iduser = prefs.getInt('id');
 
     final String url =
-        "http://192.168.1.187/buscar_progresso.php?dia=$dia&id_user=$iduser";
+        "http://192.168.1.199/buscar_progresso.php?dia=$dia&id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         if (response.body.isEmpty) {
-          print("Resposta vazia, nada para decodificar");
           return [];
         }
         List<dynamic> dados = json.decode(response.body);
-        print('Body recebido: ${response.body}');
 
         return List<Map<String, dynamic>>.from(dados);
       } else {
-        print("Erro no servidor: ${response.statusCode}");
         return [];
       }
     } catch (e) {
-      print("Erro de conexão: $e");
       return [];
     }
   }
 
-  // Função para carregar eventos ao selecionar um dia
   void carregarprogresso(DateTime selectedDay) async {
     String dataFormatada = DateFormat('yyyy-MM-dd').format(selectedDay);
     progressos = await buscarDados(dataFormatada);

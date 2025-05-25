@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:learn_logs/Interface/vizualizar_progresso.dart';
-import 'package:learn_logs/Provider/Adicionarprogresso_provider.dart';
+import 'package:learn_logs/Provider/adicionarprogresso_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -100,11 +98,9 @@ class _ProgressoState extends State<Progresso> {
                   }).toList(),
                   style: TextStyle(
                       color: const Color.fromARGB(255, 95, 11, 143),
-                      fontSize: 16), // Cor e tamanho do texto selecionado
-                  iconEnabledColor: const Color.fromARGB(
-                      255, 255, 167, 211), // Cor do ícone de dropdown
-                  iconSize: 30, // Tamanho do ícone de dropdown
-
+                      fontSize: 16),
+                  iconEnabledColor: const Color.fromARGB(255, 255, 167, 211),
+                  iconSize: 30,
                   onChanged: (val) =>
                       setState(() => _objetivoSelecionado = val),
                 ),
@@ -132,7 +128,7 @@ class _ProgressoState extends State<Progresso> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Colors.grey.withAlpha(128),
                       blurRadius: 8,
                       offset: Offset(0, 4),
                     ),
@@ -185,8 +181,6 @@ class _ProgressoState extends State<Progresso> {
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   ),
                   onPressed: () {
-                    print("objetivo selecionado $_objetivoSelecionado");
-
                     if (_objetivoSelecionado == null) {
                       showDialog(
                         context: context,
@@ -334,7 +328,6 @@ class _ProgressoState extends State<Progresso> {
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   ),
                   onPressed: () {
-                    print("clicou no psuh");
                     Navigator.push(
                       context,
                       MaterialPageRoute(

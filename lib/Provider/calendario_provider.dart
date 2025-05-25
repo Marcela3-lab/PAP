@@ -7,13 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CalendarioProvider extends ChangeNotifier {
   List<Map<String, dynamic>> eventos = [];
 
-  // Função para buscar dados do servidor
   Future<List<Map<String, dynamic>>> buscarDados(String dia) async {
     final prefs = await SharedPreferences.getInstance();
     int? iduser = prefs.getInt('id');
 
     final String url =
-        "http://192.168.1.187/buscar_eventos.php?dia=$dia&id_user=$iduser";
+        "http://192.168.1.199/buscar_eventos.php?dia=$dia&id_user=$iduser";
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -21,16 +20,13 @@ class CalendarioProvider extends ChangeNotifier {
 
         return List<Map<String, dynamic>>.from(dados);
       } else {
-        print("Erro no servidor: ${response.statusCode}");
         return [];
       }
     } catch (e) {
-      print("Erro de conexão: $e");
       return [];
     }
   }
 
-  // Função para carregar eventos ao selecionar um dia
   void carregarEventos(DateTime selectedDay) async {
     String dataFormatada = DateFormat('yyyy-MM-dd').format(selectedDay);
     eventos = await buscarDados(dataFormatada);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//1------------------------------------------------------------------------
 Widget obj1(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -15,7 +14,7 @@ Widget obj1(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -36,7 +35,7 @@ Widget obj1(BuildContext context) {
             ),
             SizedBox(width: 5),
             Text(
-              "Como definir seus objetivos",
+              "Como definir objetivos",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -51,7 +50,7 @@ Widget obj1(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Adicione metas de estudos que você deseja alcançar, e acompanhe seu progresso! \n\nCada objetivo pode ter uma descrição personalizada, onde você escreve mais detalhes sobre ele — como o que exatamente precisa ser feito ou qual o prazo para concluir. Você pode vizualizar essa descrição sempre que quiser, clicando no botão de detalhes na própria caixa do objetivo.",
+              "Adicione os objetivos de estudo que deseja alcançar e acompanhe o seu progresso! \n\nCada objetivo pode ter uma descrição personalizada, podendo assim escrever mais detalhes sobre aquele — como o que exatamente precisa de ser feito ou qual o prazo de conclusão. Pode vizualizar a descrição sempre que quiser, clicando no botão de detalhes na própria caixa do objetivo.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -67,7 +66,6 @@ Widget obj1(BuildContext context) {
   );
 }
 
-//2-----------------------------------------------------------------------------------
 Widget obj2(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -82,7 +80,7 @@ Widget obj2(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -118,7 +116,7 @@ Widget obj2(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Você pode atribuir uma cor ao seu objetivo com base em uma nota de 1 a 10. Cada nota representa uma cor diferente: \n\n🟢 1 a 4 → Cor verde\n🟡 5 a 7 → Cor amarela\n🔴 8 a 10 → Cor vermelha",
+              "Pode atribuir uma cor ao seu objetivo com base numa nota de 1 a 10. Cada nota está associada a uma cor diferente: \n\n🟢 1 a 4 → Cor verde\n🟡 5 a 7 → Cor amarela\n🔴 8 a 10 → Cor vermelha",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -134,7 +132,6 @@ Widget obj2(BuildContext context) {
   );
 }
 
-//3-----------------------------------------------------------------------------------
 Widget obj3(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -149,7 +146,7 @@ Widget obj3(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -170,7 +167,7 @@ Widget obj3(BuildContext context) {
             ),
             SizedBox(width: 5),
             Text(
-              "Idéias de organização",
+              "Ideias de organização",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -185,7 +182,7 @@ Widget obj3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "🏷️ Importância:\nUse notas maiores para objetivos mais urgentes\n🧩 Categoria dos objetivos:\ Exemplo, usar a mesma cor para objetivos de determinadas categorias\n🎯 Associação de conteúdo pela cor:\nExemplo: 'Todos os objetivos verdes são relacionados á um tópico especifico da disciplina de história' ",
+              "🏷️ Importância:\nUse notas maiores para objetivos mais urgentes.\n🧩 Categoria dos objetivos:\nComo exemplo poderá usar a mesma cor para objetivos de categorias semelhantes.\n🎯 Associação de conteúdo pela cor:\nExemplo - Todos os objetivos verdes estão relacionados com um tópico especifico da disciplina de História. ",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),

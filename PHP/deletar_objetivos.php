@@ -2,8 +2,7 @@
 include('db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $id = $_POST['id_objetivo'];
-
+$id = mysqli_real_escape_string($conexao, $_POST['id_objetivo']);
     $sql = "DELETE FROM objetivos WHERE id_objetivo = '$id'";
 
     if (mysqli_query($conexao, $sql)){

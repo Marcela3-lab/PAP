@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:learn_logs/Provider/retornardados_provider.dart';
-import 'package:learn_logs/checklogin.dart';
+
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Telaconta extends StatefulWidget {
-  const Telaconta({Key? key}) : super(key: key);
+  const Telaconta({super.key});
 
   @override
   TelacontaState createState() => TelacontaState();
@@ -28,9 +27,9 @@ class TelacontaState extends State<Telaconta> {
         dadosuserj = dados[0];
       });
     }
-    print("aaa $dados");
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -44,7 +43,7 @@ class TelacontaState extends State<Telaconta> {
               color: const Color.fromARGB(255, 240, 228, 255),
             ),
             child: Icon(
-              Icons.account_circle, // aqui você escolhe o ícone que quer
+              Icons.account_circle,
               color: const Color.fromARGB(255, 117, 16, 117),
               size: 70,
             ),

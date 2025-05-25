@@ -3,7 +3,7 @@ include('db.php');
 header('Content-Type: application/json');
 
 
-$dia = $_GET['dia'] ?? null;
+$dia = mysqli_real_escape_string($conexao, $_GET['dia']);
 $idUser = isset($_GET['id_user']) ? mysqli_real_escape_string($conexao, $_GET['id_user']) : '';
 
 if ($dia) {

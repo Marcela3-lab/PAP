@@ -1,44 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Interface/Adicionar_tarefa.dart';
-import 'package:learn_logs/Provider/AdicionarTarefa_provider.dart';
+import 'package:learn_logs/Interface/adicionar_tarefa.dart';
+import 'package:learn_logs/Provider/adicionartarefa_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:learn_logs/Provider/calendario_provider.dart';
 
 class Calendario extends StatefulWidget {
-  const Calendario({Key? key}) : super(key: key);
-  _CalendarioState createState() => _CalendarioState();
+  const Calendario({super.key});
+  @override
+  CalendarioState createState() => CalendarioState();
 }
 
-class _CalendarioState extends State<Calendario> {
-  CalendarFormat _calendarioFormato = CalendarFormat.month;
+class CalendarioState extends State<Calendario> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay = DateTime.now();
   String? formattedDate;
   final int _opcaoselecionada = 0;
-
+  CalendarFormat calendarioFormato = CalendarFormat.month;
   @override
   void initState() {
     super.initState();
     _selectedDay ??= DateTime.now();
     formattedDate = DateFormat('dd-MM-yyyy').format(_selectedDay!);
 
-    Future.microtask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final calendarioProvider =
           Provider.of<CalendarioProvider>(context, listen: false);
       calendarioProvider.carregarEventos(_selectedDay!);
     });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      FocusScope.of(context).unfocus();
-    });
   }
 
-  Widget build(BuildContext contex) {
+  @override
+  Widget build(BuildContext context) {
     final calendarioProvider = Provider.of<CalendarioProvider>(context);
     final eventos = calendarioProvider.eventos;
     final tarefaconcluidaProvider =
-        Provider.of<AdicionartarefaProvider>(context, listen: false);
+        Provider.of<Adicionartarefaprovider>(context, listen: false);
     bool concluida = false;
 
     return Scaffold(
@@ -54,7 +52,7 @@ class _CalendarioState extends State<Calendario> {
                   lastDay: DateTime(2030, 12, 31),
                   onFormatChanged: (format) {
                     setState(() {
-                      _calendarioFormato = format;
+                      calendarioFormato = format;
                     });
                   },
                   selectedDayPredicate: (day) {
@@ -71,7 +69,6 @@ class _CalendarioState extends State<Calendario> {
                     Provider.of<CalendarioProvider>(context, listen: false)
                         .carregarEventos(selectedDay);
                   },
-                  //Não trava
                   calendarStyle: CalendarStyle(
                     todayTextStyle: TextStyle(color: Colors.white),
                     todayDecoration: BoxDecoration(
@@ -93,17 +90,17 @@ class _CalendarioState extends State<Calendario> {
                       borderRadius: BorderRadius.circular(10),
                     )),
                 onPressed: () async {
-                  print("Há um erro muito grande aqui! $formattedDate");
-
                   final resultado = await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => PAgenda(nome: formattedDate!),
                     ),
                   );
-                  if (resultado == true) {
-                    Provider.of<CalendarioProvider>(context, listen: false)
-                        .carregarEventos(_selectedDay!);
-                    setState(() {});
+                  if (context.mounted) {
+                    if (resultado == true) {
+                      Provider.of<CalendarioProvider>(context, listen: false)
+                          .carregarEventos(_selectedDay!);
+                      setState(() {});
+                    }
                   }
                 },
                 child: const Icon(Icons.add),
@@ -143,14 +140,11 @@ class _CalendarioState extends State<Calendario> {
                                     color: Color.fromARGB(255, 15, 168, 15)),
                                 onPressed: () async {
                                   concluida = true;
-                                  print(
-                                      'Estado: ${(concluida) ? 'concluida' : 'pendente'}');
-
                                   await tarefaconcluidaProvider.estado(
                                       concluida,
                                       int.parse(evento["id_agenda"]));
 
-                                  if (mounted) {
+                                  if (context.mounted) {
                                     Provider.of<CalendarioProvider>(context,
                                             listen: false)
                                         .carregarEventos(_selectedDay!);
@@ -165,11 +159,13 @@ class _CalendarioState extends State<Calendario> {
                                 onPressed: () async {
                                   await tarefaconcluidaProvider.deletartarefa(
                                       int.parse(evento["id_agenda"]));
-                                  Provider.of<CalendarioProvider>(context,
-                                          listen: false)
-                                      .carregarEventos(_selectedDay!);
+                                  if (context.mounted) {
+                                    Provider.of<CalendarioProvider>(context,
+                                            listen: false)
+                                        .carregarEventos(_selectedDay!);
 
-                                  setState(() {});
+                                    setState(() {});
+                                  }
                                 },
                               )
                             ]),

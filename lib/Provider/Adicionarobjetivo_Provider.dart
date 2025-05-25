@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AdicionarobjetivoProvider extends ChangeNotifier {
-//Função para verificar a duracao
+class Adicionarobjetivoprovider extends ChangeNotifier {
   Future<bool> verificarduracao(BuildContext context, int duracao) async {
     if (duracao >= 1 && duracao <= 24) {
       return true;
@@ -26,9 +23,7 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
       return false;
     }
   }
-  //Funcao verificar tipo
 
-  //Funcao pra ver se há campos vazios
   Future<bool> verificarcampos(
       BuildContext context, titulo, descricao, duracao, tipo) async {
     int? duracaoint = int.tryParse(duracao);
@@ -56,7 +51,6 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
     }
   }
 
-  //Funcao principal pra mandar pra base de dados
   Future<void> adicionarobjetivo(
     BuildContext context,
     titulo,
@@ -69,7 +63,7 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     int? iduser = prefs.getInt('id');
 
-    String url = "http://192.168.1.187/objetivos.php";
+    String url = "http://192.168.1.199/objetivos.php";
 
     try {
       final response = await http.post(
@@ -83,14 +77,8 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
           'id_user': iduser.toString(),
         },
       );
-      print('Resposta do servidor: ${response.body}');
 
       if (response.statusCode == 200 && response.body.isNotEmpty) {
-        final data = jsonDecode(response.body);
-
-        if (data["status"] == "sucesso") {
-          print(response.body);
-        }
         if (currentContext.mounted) {
           showDialog(
             context: currentContext,
@@ -107,24 +95,24 @@ class AdicionarobjetivoProvider extends ChangeNotifier {
           );
         }
       } else {
-        showDialog(
-          context: currentContext,
-          builder: (context) => AlertDialog(
-            title: Text("Erro"),
-            content: Text("Erro ao adicionar objetivo ${response.statusCode}"),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text("Ok"),
-              )
-            ],
-          ),
-        );
-        print("Response body: ${response.body}");
+        if (context.mounted) {
+          showDialog(
+            context: currentContext,
+            builder: (context) => AlertDialog(
+              title: Text("Erro"),
+              content:
+                  Text("Erro ao adicionar objetivo ${response.statusCode}"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Ok"),
+                )
+              ],
+            ),
+          );
+        }
       }
-    } catch (e, stackTrace) {
-      print("Erro: $e");
-      print("StackTrace: $stackTrace");
+    } catch (e) {
       if (currentContext.mounted) {
         showDialog(
           context: currentContext,

@@ -2,37 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:learn_logs/Navegacao_page.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:learn_logs/Provider/AdicionarTarefa_provider.dart';
+import 'package:learn_logs/Provider/adicionartarefa_provider.dart';
 
 class PAgenda extends StatefulWidget {
   final String? nome;
 
-  PAgenda({required this.nome});
+  const PAgenda({super.key, required this.nome});
 
   @override
-  _PAgendaState createState() => _PAgendaState();
+  PAgendaState createState() => PAgendaState();
 }
 
-class _PAgendaState extends State<PAgenda> {
+class PAgendaState extends State<PAgenda> {
   final TextEditingController _inicio = TextEditingController();
   final TextEditingController _fim = TextEditingController();
   final TextEditingController _titulo = TextEditingController();
 
-//converte hora pro formato que da pra verificar
   DateTime converterHora(String hora) {
     String hoje = DateFormat('yyyy-MM-dd').format(DateTime.now());
     String horaeData = "$hoje $hora";
     return DateFormat("yyyy-MM-dd HH:mm").parse(horaeData);
   }
 
-//---------------------------- INICIO DESIGN ----------------------------//
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).unfocus();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider =
-        Provider.of<AdicionartarefaProvider>(context, listen: false);
+        Provider.of<Adicionartarefaprovider>(context, listen: false);
 
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('dd/MM/yyyy').format(now);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(80.0),
@@ -67,7 +71,7 @@ class _PAgendaState extends State<PAgenda> {
                     ),
                   ],
                 ),
-                _Pergunta(_titulo, _inicio, _fim),
+                pergunta(_titulo, _inicio, _fim),
                 SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -87,29 +91,29 @@ class _PAgendaState extends State<PAgenda> {
                       final titulo = _titulo.text;
                       final inicio = _inicio.text;
                       final fim = _fim.text;
-
                       if (await provider.verificarcamposagenda(
                           context, titulo, inicio, fim)) {
-                        await provider.enviarTarefa(
-                          context,
-                          titulo,
-                          inicio,
-                          fim,
-                          widget.nome!,
-                        );
+                        if (context.mounted) {
+                          await provider.enviarTarefa(
+                            context,
+                            titulo,
+                            inicio,
+                            fim,
+                            widget.nome!,
+                          );
 
-                        print('context do pop: $context');
-                        print('mounted: $mounted');
-
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navegacao(
-                              indiceInicial: 0,
-                            ),
-                          ),
-                          (Route<dynamic> route) => false,
-                        );
+                          if (context.mounted) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Navegacao(
+                                  indiceInicial: 0,
+                                ),
+                              ),
+                              (Route<dynamic> route) => false,
+                            );
+                          }
+                        }
                       }
                     },
                     child: const Text('Salvar Tarefa'),
@@ -121,7 +125,7 @@ class _PAgendaState extends State<PAgenda> {
         ));
   }
 
-  Widget _Pergunta(TextEditingController titulo, TextEditingController inicio,
+  Widget pergunta(TextEditingController titulo, TextEditingController inicio,
       TextEditingController fim) {
     return Container(
       margin: const EdgeInsets.all(16),

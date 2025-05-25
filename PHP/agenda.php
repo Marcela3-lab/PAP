@@ -13,12 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_fk = intval($_POST['id_user']);
     $dia = date("Y-m-d", strtotime( $dia)); 
 
-  
-    
-   
 
-
-    // Inserir os dados na base de dados
     $sql_agenda = "INSERT INTO agenda (titulo, inicio, fim, dia, id_user) VALUES ('$titulo', '$inicio', '$fim', '$dia','$id_fk')";
 
 

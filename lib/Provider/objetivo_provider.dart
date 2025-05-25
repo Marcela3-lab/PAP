@@ -1,23 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ObjetivoProvider extends ChangeNotifier {
-//Função pra deletar objetivo
-
-  // Função para buscar dados do servidor
-  Future<void> deletarObjetivo(id_objetivo) async {
-    final response = await http.post(
-      Uri.parse('http://192.168.1.187/deletar_objetivos.php'),
-      body: {'id_objetivo': id_objetivo.toString()},
+  Future<void> deletarObjetivo(idobjetivo) async {
+    await http.post(
+      Uri.parse('http://192.168.1.199/deletar_objetivos.php'),
+      body: {'id_objetivo': idobjetivo.toString()},
     );
-    if (response.statusCode == 200) {
-      print("Objetivo deletado com sucesso!");
-    } else {
-      print("Erro ao deletar objetivo: ${response.statusCode}");
-    }
   }
 
   List<Map<String, dynamic>> _objetivos = [];
@@ -28,13 +19,12 @@ class ObjetivoProvider extends ChangeNotifier {
     int? idUser = prefs.getInt('id');
 
     final String url =
-        "http://192.168.1.187/buscar_objetivos.php?id_user=$idUser";
+        "http://192.168.1.199/buscar_objetivos.php?id_user=$idUser";
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         var dados = jsonDecode(response.body);
         _objetivos = List<Map<String, dynamic>>.from(dados);
-//CONVERTER COR
 
         for (var item in _objetivos) {
           int cor = int.tryParse(item['cor'].toString()) ?? 0;
@@ -42,24 +32,21 @@ class ObjetivoProvider extends ChangeNotifier {
           if (cor >= 8 && cor <= 10) {
             item['cor'] = Colors.red.shade200;
           } else if (cor >= 1 && cor <= 4) {
-            item['cor'] = Colors.orange.shade200;
-          } else if (cor >= 5 && cor <= 7) {
             item['cor'] = Colors.green.shade200;
-          } else {
+          } else if (cor >= 5 && cor <= 7) {
+            item['cor'] = Colors.orange.shade200;
+          } else if (cor < 0 || cor > 10) {
             item['cor'] = Color.fromARGB(255, 255, 255, 255);
           }
         }
 
         notifyListeners();
-        print("Objetivos : $_objetivos");
 
         return _objetivos;
       } else {
-        print("erro ${response.statusCode}");
         return [];
       }
     } catch (e) {
-      print("Erro de conexão: $e");
       return [];
     }
   }

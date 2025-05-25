@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Nobjetivos.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Progressodia.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Tarefas_feitas.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Tarefaspendentes.dart';
+import 'package:learn_logs/Provider/home-containersProvider/nobjetivos_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/nprogressos_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/tarefasfeitas_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/tarefaspendentes_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,18 +17,21 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final tarefas1Provider =
+          Provider.of<Tarefaspendentesprovider>(context, listen: false);
+      tarefas1Provider.numtarefaspen();
+      final tarefas2Provider =
+          Provider.of<Tarefasfeitasprovider>(context, listen: false);
+      tarefas2Provider.numtarefasfeitas();
+      final objetivos3Provider =
+          Provider.of<Nobjetivos>(context, listen: false);
+      objetivos3Provider.ndeobjtivos();
+      final progresso4Provider =
+          Provider.of<Nprogressosprovider>(context, listen: false);
+      progresso4Provider.numdeprogrssos();
+    });
     buscarnome();
-    final tarefas1Provider =
-        Provider.of<TarefaspendentesProvider>(context, listen: false);
-    tarefas1Provider.numtarefaspen();
-    final tarefas2Provider =
-        Provider.of<TarefasfeitasProvider>(context, listen: false);
-    tarefas2Provider.numtarefasfeitas();
-    final objetivos3Provider = Provider.of<Nobjetivos>(context, listen: false);
-    objetivos3Provider.Ndeobjtivos();
-    final progresso4Provider =
-        Provider.of<Nprogressosprovider>(context, listen: false);
-    progresso4Provider.numdeprogrssos();
   }
 
   void buscarnome() async {
@@ -39,8 +42,7 @@ class HomeState extends State<Home> {
     });
   }
 
-  Widget Nome(nomeuser) {
-    print("nomeprefs: $nomeprefs");
+  Widget nome(nomeuser) {
     return Container(
         padding: const EdgeInsets.all(16.0),
         child: Text('Olá, $nomeuser!',
@@ -49,9 +51,8 @@ class HomeState extends State<Home> {
               fontSize: 25,
             )));
   }
-//--------------------------------------- 1-widget
 
-  Widget Tarefaspendentes() {
+  Widget tarefaspendentes() {
     return Container(
         width: 160,
         height: 150,
@@ -78,7 +79,7 @@ class HomeState extends State<Home> {
           ],
         ),
         padding: const EdgeInsets.all(16.0),
-        child: Consumer<TarefaspendentesProvider>(
+        child: Consumer<Tarefaspendentesprovider>(
           builder: (context, provider, child) {
             return Text(
               'Tarefas Pendentes: ${provider.numTarefas}',
@@ -93,7 +94,6 @@ class HomeState extends State<Home> {
         ));
   }
 
-//---------------------------------------2-widget
   Widget tarefasconcluidas() {
     return Container(
       width: 160,
@@ -104,8 +104,8 @@ class HomeState extends State<Home> {
             colors: [Color.fromARGB(255, 250, 244, 191), Color(0xFFFFEAF1)]),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white, // cor da borda
-          width: 5, // espessura da borda
+          color: Colors.white,
+          width: 5,
         ),
         boxShadow: [
           BoxShadow(
@@ -117,10 +117,10 @@ class HomeState extends State<Home> {
         ],
       ),
       padding: const EdgeInsets.all(16.0),
-      child: Consumer<TarefasfeitasProvider>(
+      child: Consumer<Tarefasfeitasprovider>(
         builder: (context, provider, child) {
           return Text(
-            'Tarefas Concluidas: ${provider.numTarefas}',
+            'Tarefas Concluídas: ${provider.numTarefas}',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -132,9 +132,8 @@ class HomeState extends State<Home> {
       ),
     );
   }
-//---------------------------------------3-widget
 
-  Widget objetivoprogeuesso() {
+  Widget objetivoprogresso() {
     return Container(
       width: 160,
       height: 150,
@@ -144,8 +143,8 @@ class HomeState extends State<Home> {
             colors: [Color.fromARGB(255, 250, 244, 191), Color(0xFFFFEAF1)]),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white, // cor da borda
-          width: 5, // espessura da borda
+          color: Colors.white,
+          width: 5,
         ),
         boxShadow: [
           BoxShadow(
@@ -172,7 +171,6 @@ class HomeState extends State<Home> {
       ),
     );
   }
-//---------------------------------------4-widget
 
   Widget progressodia() {
     return Container(
@@ -188,8 +186,8 @@ class HomeState extends State<Home> {
           ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.white, // cor da borda
-            width: 5, // espessura da borda
+            color: Colors.white,
+            width: 5,
           ),
           boxShadow: [
             BoxShadow(
@@ -223,7 +221,6 @@ class HomeState extends State<Home> {
             child: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        // WIDGET NOME USER
         const SizedBox(height: 30),
         CircleAvatar(
           radius: 30,
@@ -235,7 +232,7 @@ class HomeState extends State<Home> {
           ),
         ),
         const SizedBox(height: 10),
-        Nome(nomeprefs),
+        nome(nomeprefs),
         const SizedBox(height: 1),
         Text(
           ' Um dia produtivo começa com um bom plano.',
@@ -246,26 +243,22 @@ class HomeState extends State<Home> {
           ),
         ),
         const SizedBox(height: 48),
-
-        //CONTAINER 1
-
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Tarefaspendentes(),
+              tarefaspendentes(),
               SizedBox(
                 width: 15,
               ),
               tarefasconcluidas(),
             ]),
-        //outra linha
         const SizedBox(height: 15),
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              objetivoprogeuesso(),
+              objetivoprogresso(),
               SizedBox(
                 width: 15,
               ),

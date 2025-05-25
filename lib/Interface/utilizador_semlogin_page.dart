@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Interface/Home_page.dart';
+
 import 'package:learn_logs/Navegacao_page.dart';
-import 'package:learn_logs/Provider/retornardados_provider.dart';
+
 import 'package:learn_logs/Provider/verificaruser.dart';
 import 'package:provider/provider.dart';
 import 'package:learn_logs/Interface/utilizador_logado_page.dart';
 import 'package:learn_logs/Provider/utilizador_semlogin_provider.dart';
 import 'package:email_validator/email_validator.dart';
 
-//Função principal pra inicial o aplicativo, que no caso se chama MyApp
-
-//Define uma classe
 class UtilizadorSemlogin extends StatefulWidget {
   const UtilizadorSemlogin({super.key});
 
@@ -27,7 +24,7 @@ class UtilizadorSemloginState extends State<UtilizadorSemlogin> {
     final TextEditingController email = TextEditingController();
     final TextEditingController senha = TextEditingController();
     double largura = MediaQuery.of(context).size.width;
-    double altura = MediaQuery.of(context).size.height;
+
     return Scaffold(
         backgroundColor: const Color.fromARGB(246, 255, 238, 212),
         body: SingleChildScrollView(
@@ -44,19 +41,17 @@ class UtilizadorSemloginState extends State<UtilizadorSemlogin> {
                   const Text("Criar Conta",
                       style: TextStyle(
                         fontSize: 30,
-                        color: const Color.fromARGB(255, 143, 33, 134),
+                        color: Color.fromARGB(255, 143, 33, 134),
                         letterSpacing: 1.5,
                       )),
                   const SizedBox(height: 40),
-                  const Text("Digite seus dados para criar sua conta",
+                  const Text("Digite seus dados para criar a sua conta",
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 143, 33, 134),
                         letterSpacing: 1.5,
                       )),
                   const SizedBox(height: 50),
-
-                  //--nome
                   TextFormField(
                     controller: nome,
                     decoration: const InputDecoration(
@@ -83,8 +78,6 @@ class UtilizadorSemloginState extends State<UtilizadorSemlogin> {
                     },
                   ),
                   const SizedBox(height: 20),
-
-                  //-----email
                   TextFormField(
                     controller: email,
                     decoration: const InputDecoration(
@@ -111,8 +104,6 @@ class UtilizadorSemloginState extends State<UtilizadorSemlogin> {
                     },
                   ),
                   const SizedBox(height: 20),
-
-                  //--senha
                   TextFormField(
                     controller: senha,
                     decoration: const InputDecoration(
@@ -155,41 +146,46 @@ class UtilizadorSemloginState extends State<UtilizadorSemlogin> {
                           final dados = await Provider.of<Verificaruser>(
                                   context,
                                   listen: false)
-                              .buscarnome(context, nome.text);
+                              .buscarnome(context, nome.text, email.text);
                           if (dados == true) {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      title: Text('Nome Inválido'),
-                                      content: Text(
-                                          'Este nome de utilizador já existe'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .pop(); // Fecha o dialog
-                                          },
-                                          child: Text('Fechar'),
-                                        ),
-                                      ]);
-                                });
+                            if (context.mounted) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        title: Text('Aviso'),
+                                        content: Text(
+                                            'Nome de utilizador e/ou email já existente'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Fechar'),
+                                          ),
+                                        ]);
+                                  });
+                            }
                             return;
                           } else {
-                            await Provider.of<UtilizadorSemloginProvider>(
-                                    context,
-                                    listen: false)
-                                .enviarDados(
-                                    nome.text.trim(),
-                                    email.text.trim(),
-                                    senha.text.trim(),
-                                    context);
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                              builder: (context) => Navegacao(
-                                indiceInicial: 2,
-                              ),
-                            ));
+                            if (context.mounted) {
+                              await Provider.of<UtilizadorSemloginProvider>(
+                                      context,
+                                      listen: false)
+                                  .enviarDados(
+                                      nome.text.trim(),
+                                      email.text.trim(),
+                                      senha.text.trim(),
+                                      context);
+                            }
+                            if (context.mounted) {
+                              Navigator.of(context)
+                                  .pushReplacement(MaterialPageRoute(
+                                builder: (context) => Navegacao(
+                                  indiceInicial: 2,
+                                ),
+                              ));
+                            }
                           }
                         }
                       },

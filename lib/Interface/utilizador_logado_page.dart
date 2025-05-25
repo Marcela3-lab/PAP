@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Navegacao_page.dart';
+
 import 'package:learn_logs/Provider/utilizador_logado_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -9,15 +9,10 @@ class Utilizadorlogado extends StatelessWidget {
   const Utilizadorlogado({super.key});
 
   @override
-
-//1º funcao que verifica se o nome do user ta no shared prefernces
-
-  @override
   Widget build(BuildContext context) {
     final TextEditingController nome = TextEditingController();
     final TextEditingController senha = TextEditingController();
     double largura = MediaQuery.of(context).size.width;
-    double altura = MediaQuery.of(context).size.height;
 
     return Scaffold(
         backgroundColor: const Color.fromARGB(246, 255, 238, 212),
@@ -29,20 +24,18 @@ class Utilizadorlogado extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 160),
-
                   const Text("Iniciar Sessão",
                       style: TextStyle(
                           fontSize: 30,
-                          color: const Color.fromARGB(255, 143, 33, 134))),
+                          color: Color.fromARGB(255, 143, 33, 134))),
                   const SizedBox(height: 48),
                   const Text("Digite seus dados para iniciar sessão",
                       style: TextStyle(
                         fontSize: 16,
-                        color: const Color.fromARGB(255, 143, 33, 134),
+                        color: Color.fromARGB(255, 143, 33, 134),
                         letterSpacing: 1.5,
                       )),
                   const SizedBox(height: 60),
-                  //--nome
                   TextFormField(
                     controller: nome,
                     decoration: const InputDecoration(
@@ -96,7 +89,7 @@ class Utilizadorlogado extends StatelessWidget {
                           if (nome.text.isNotEmpty && senha.text.isNotEmpty) {
                             await Provider.of<UtilizadorLogadoProvider>(context,
                                     listen: false)
-                                .carregar_user(context, nome.text.trim(),
+                                .carregaruser(context, nome.text.trim(),
                                     senha.text.trim());
                           } else {
                             showDialog(
@@ -117,7 +110,6 @@ class Utilizadorlogado extends StatelessWidget {
                         },
                         child: const Text("Iniciar Sessão"),
                       )),
-
                   const SizedBox(
                     height: 30,
                   ),

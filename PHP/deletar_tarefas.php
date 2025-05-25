@@ -2,7 +2,8 @@
 include('db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $id = $_POST['id_agenda'];
+    $id = mysqli_real_escape_string($conexao, $_POST['id_agenda']);
+
 
     $sql = "DELETE FROM agenda WHERE id_agenda = '$id'";
 

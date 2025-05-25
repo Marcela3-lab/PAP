@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//1------------------------------------------------------------------------
 Widget tempo1(BuildContext context) {
   return Container(
     alignment: Alignment.center,
@@ -15,7 +14,7 @@ Widget tempo1(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -51,7 +50,7 @@ Widget tempo1(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Quando você organiza sua rotina, o cérebro entende que aquilo é importante. Ter horários definidos reduz o estresse e aumenta a produtividade, porque o cérebro funciona melhor quando sabe o que esperar.\n\nDica: Use a agenda para marcar seus horários de estudo e outras tarefas, seguir uma rotina leve, mas constante.",
+              "Quando organiza a sua rotina, isto é entendido pelo cérebro como importante. Ter horários definidos reduz o stresse e aumenta a produtividade, porque o cérebro funciona melhor quando sabe o que esperar.\n\nDica: Use a agenda para marcar os seus horários de estudo e outras tarefas e siga uma rotina bem planeada, mas constante.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -67,11 +66,10 @@ Widget tempo1(BuildContext context) {
   );
 }
 
-//2-----------------------------------------------------------------------------------
 Widget tempo2(BuildContext context) {
   return Container(
     alignment: Alignment.center,
-    height: 360,
+    height: 390,
     width: double.infinity,
     margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
     padding: const EdgeInsets.symmetric(vertical: 11),
@@ -82,7 +80,7 @@ Widget tempo2(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(52),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -118,7 +116,7 @@ Widget tempo2(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "O cérebro gasta mais energia com tarefas difíceis. Se você deixar o mais difícil pro final do dia, vai se sentir mais cansado e propenso a desistir. Estudar o mais importante primeiro economiza energia mental.\n\nDica: Defina 1 ou 2 objetivos principais para o dia. Se fizer só isso, já terá feito o essencial. Lembre-se de olhar a home para ver um resumo do seu dia.",
+              "O cérebro gasta mais energia com tarefas difíceis. Se  deixar o mais difícil para o fim do dia, vai sentir mais cansaço e propensão à desistência. Estudar o mais importante ajuda a economizar energia mental.\n\nDica: Defina 1 ou 2 objetivos principais para o dia. Com isto, já terá feito o essencial. Lembre-se de olhar a Home para ver um resumo do seu dia.",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -134,11 +132,10 @@ Widget tempo2(BuildContext context) {
   );
 }
 
-//3-------------------------------------------------------------------------------------
 Widget tempo3(BuildContext context) {
   return Container(
     alignment: Alignment.center,
-    height: 400,
+    height: 350,
     width: double.infinity,
     margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
     padding: const EdgeInsets.symmetric(vertical: 11),
@@ -149,7 +146,7 @@ Widget tempo3(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -202,6 +199,7 @@ Widget tempo3(BuildContext context) {
 }
 
 class GestaoTempoTab extends StatelessWidget {
+  const GestaoTempoTab({super.key});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

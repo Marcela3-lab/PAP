@@ -6,14 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
     $email = mysqli_real_escape_string($conexao, $_POST['email']);
     $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
+    $senhahash = password_hash($senha, PASSWORD_DEFAULT);
 
 
-    // Inserir os dados na base de dados
-    $sql_utilizador = "INSERT INTO utilizador (nome, email, senha,Datad) VALUES ('$nome', '$email', '$senha',NOW())";
+    $sql_utilizador = "INSERT INTO utilizador (nome, email, senha,Datad) VALUES ('$nome', '$email', '$senhahash',NOW())";
 
     if (mysqli_query($conexao, $sql_utilizador)) {
-        // Buscar o ID do usuário recém-criado
-        $sql = "SELECT id_user FROM utilizador WHERE nome='$nome' and email='$email' AND senha='$senha'";
+        $sql = "SELECT id_user FROM utilizador WHERE nome='$nome' and email='$email' ";
         $resultado = mysqli_query($conexao, $sql);
         
 

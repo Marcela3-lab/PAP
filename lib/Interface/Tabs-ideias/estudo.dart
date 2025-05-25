@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-//1------------------------------------------------------------------------
 Widget estudo1(BuildContext context) {
   return Container(
     alignment: Alignment.center,
-    height: 300,
+    height: 320,
     width: double.infinity,
     margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
     padding: const EdgeInsets.symmetric(vertical: 11),
@@ -15,7 +14,7 @@ Widget estudo1(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -51,7 +50,7 @@ Widget estudo1(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "1️⃣: Crie uma lista de objetivos por ordem de importância\n2️⃣: Ajuste um temporizador para 25 minutos\n3️⃣:Trabalhe num objetivo pelo tempo estabelecido\n4️⃣: Faça um intervalo de 5 minutos\n5️⃣: Depois de quatro pomodoros, faça um intervalo de 15 a 30 minutos ",
+              "1️⃣ Crie uma lista de objetivos por ordem de importância\n2️⃣ Ajuste um temporizador para 25 minutos\n3️⃣ Trabalhe num objetivo no tempo estabelecido\n4️⃣ Faça um intervalo de 5 minutos\n5️⃣ Depois de quatro pomodoros, faça um intervalo de 15 a 30 minutos ",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -67,11 +66,10 @@ Widget estudo1(BuildContext context) {
   );
 }
 
-//2-----------------------------------------------------------------------------------
 Widget estudo2(BuildContext context) {
   return Container(
     alignment: Alignment.center,
-    height: 300,
+    height: 340,
     width: double.infinity,
     margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
     padding: const EdgeInsets.symmetric(vertical: 11),
@@ -82,7 +80,7 @@ Widget estudo2(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -118,7 +116,7 @@ Widget estudo2(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "1️⃣: Escolha um assunto de estudo\n2️⃣: Divida este assunto em vários tópicos\n3️⃣:Ex: Mátematica - Tópicos: Fração,Polinômios...\n4️⃣: Faça intervalos durante cada tópico\n5️⃣: Dica: Defina seus objetivos de uma mesma categoria por cores",
+              "1️⃣ Escolha um assunto de estudo\n2️⃣ Divida este assunto em vários tópicos.\nComo exemplo, em Matemática podemos utilizar os tópicos: Fração, Polinómios...\n3️⃣ Faça intervalos durante cada tópico\n4️⃣ Dica: Defina os seus objetivos da mesma categoria, utilizando a mesma cor",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -134,11 +132,10 @@ Widget estudo2(BuildContext context) {
   );
 }
 
-//3-------------------------------------------------------------------------------------
 Widget estudo3(BuildContext context) {
   return Container(
     alignment: Alignment.center,
-    height: 400,
+    height: 310,
     width: double.infinity,
     margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
     padding: const EdgeInsets.symmetric(vertical: 11),
@@ -149,7 +146,7 @@ Widget estudo3(BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: const Color.fromARGB(255, 140, 98, 189).withOpacity(0.2),
+          color: const Color.fromARGB(255, 140, 98, 189).withAlpha(51),
           spreadRadius: 2,
           blurRadius: 8,
           offset: Offset(0, 4),
@@ -185,7 +182,7 @@ Widget estudo3(BuildContext context) {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "1️⃣: Atribua cores a conceitos ou categorias\n2️⃣: Adicione o conteúdo que prescisas lembrar\n3️⃣Tente memorizar o conteúdo com base na cor\n4️⃣: Dica: Utilize a descricão dos objetivo para adicionar o conteudo\n5️⃣: Dica: Defina o titulo e a cor\n6️⃣:Clique na caixa de diálogo do objetivo sempre que quiser lembrar o conteúdo",
+              "1️⃣ Atribua cores a conceitos ou categorias\n2️⃣ Adicione o conteúdo que prescisa relembrar\n3️⃣ Tente memorizar o conteúdo com base na cor\n4️⃣ Dica: Utilize a descrição do objetivo para adicionar o conteúdo\n5️⃣ Dica: Defina o titulo e a cor\n",
               style: TextStyle(
                 fontSize: 16,
                 color: const Color.fromARGB(221, 0, 0, 0),
@@ -202,6 +199,7 @@ Widget estudo3(BuildContext context) {
 }
 
 class TecnicasDeEstudoTab extends StatelessWidget {
+  const TecnicasDeEstudoTab({super.key});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

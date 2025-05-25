@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:learn_logs/Interface/utilizador_semlogin_page.dart';
 import 'package:learn_logs/Interface/utilizador_logado_page.dart';
-import 'package:learn_logs/Provider/AdicionarTarefa_provider.dart';
-import 'package:learn_logs/Provider/Adicionarprogresso_provider.dart';
-import 'package:learn_logs/Provider/Adicionarobjetivo_Provider.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Nobjetivos.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Progressodia.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Tarefas_feitas.dart';
-import 'package:learn_logs/Provider/Home-containersProvider/Tarefaspendentes.dart';
-import 'package:learn_logs/Provider/SairSH_provider.dart';
+import 'package:learn_logs/Provider/adicionartarefa_provider.dart';
+import 'package:learn_logs/Provider/adicionarprogresso_provider.dart';
+import 'package:learn_logs/Provider/adicionarobjetivo_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/nobjetivos_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/nprogressos_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/tarefasfeitas_provider.dart';
+import 'package:learn_logs/Provider/home-containersProvider/tarefaspendentes_provider.dart';
+import 'package:learn_logs/Provider/sairsh_provider.dart';
 import 'package:learn_logs/Provider/buscarprogresso_provider.dart';
 import 'package:learn_logs/Provider/dropdown_progressoprovider.dart';
 import 'package:learn_logs/Provider/calendario_provider.dart';
@@ -21,7 +20,7 @@ import 'package:learn_logs/Provider/utilizador_logado_provider.dart';
 import 'package:learn_logs/Provider/verificaruser.dart';
 import 'package:learn_logs/checklogin.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -31,24 +30,22 @@ Future<void> main() async {
     ChangeNotifierProvider(create: (_) => UtilizadorSemloginProvider()),
     ChangeNotifierProvider(create: (_) => UtilizadorLogadoProvider()),
     ChangeNotifierProvider(create: (_) => CalendarioProvider()),
-    ChangeNotifierProvider(create: (_) => AdicionartarefaProvider()),
-    ChangeNotifierProvider(create: (_) => AdicionarobjetivoProvider()),
+    ChangeNotifierProvider(create: (_) => Tarefaspendentesprovider()),
+    ChangeNotifierProvider(create: (_) => Tarefasfeitasprovider()),
+    ChangeNotifierProvider(create: (_) => Nobjetivos()),
+    ChangeNotifierProvider(create: (_) => Nprogressosprovider()),
+    ChangeNotifierProvider(create: (_) => Adicionartarefaprovider()),
+    ChangeNotifierProvider(create: (_) => Adicionarobjetivoprovider()),
     ChangeNotifierProvider(create: (_) => ObjetivoProvider()),
     ChangeNotifierProvider(create: (_) => AdicionarProgressoProvider()),
     ChangeNotifierProvider(create: (_) => ProgressoProvider()),
     ChangeNotifierProvider(create: (_) => BuscarprogressoProvider()),
-    ChangeNotifierProvider(create: (_) => TarefaspendentesProvider()),
-    ChangeNotifierProvider(create: (_) => TarefasfeitasProvider()),
-    ChangeNotifierProvider(create: (_) => Nobjetivos()),
-    ChangeNotifierProvider(create: (_) => Nprogressosprovider()),
     ChangeNotifierProvider(create: (_) => Sairprovider()),
     ChangeNotifierProvider(create: (_) => RetornardadosProvider()),
     ChangeNotifierProvider(create: (_) => Verificaruser()),
-    ChangeNotifierProvider(create: (_) => SairshProvider()),
+    ChangeNotifierProvider(create: (_) => Sairshprovider()),
   ], child: const MyApp()));
 }
-
-bool darkMode = false;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -65,17 +62,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Tela_Principal extends StatefulWidget {
-  const Tela_Principal({super.key});
+class TelaPrincipal extends StatefulWidget {
+  const TelaPrincipal({super.key});
 
   @override
-  _Tela_PrincipalState createState() => _Tela_PrincipalState();
+  TelaPrincipalState createState() => TelaPrincipalState();
 }
 
-class _Tela_PrincipalState extends State<Tela_Principal> {
+class TelaPrincipalState extends State<TelaPrincipal> {
+  @override
   Widget build(BuildContext context) {
     double largura = MediaQuery.of(context).size.width;
-    double altura = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -88,13 +85,13 @@ class _Tela_PrincipalState extends State<Tela_Principal> {
               children: [
                 const Icon(
                   Icons.flag_circle,
-                  color: const Color.fromARGB(255, 241, 184, 97),
+                  color: Color.fromARGB(255, 241, 184, 97),
                   size: 30,
                 ),
                 const Text("LearnLogs",
                     style: TextStyle(
                       fontSize: 30,
-                      color: const Color.fromARGB(255, 143, 33, 134),
+                      color: Color.fromARGB(255, 143, 33, 134),
                       letterSpacing: 1.5,
                     ))
               ],
@@ -122,7 +119,6 @@ class _Tela_PrincipalState extends State<Tela_Principal> {
                       MaterialPageRoute(
                           builder: (context) => const UtilizadorSemlogin()),
                     );
-                    style:
                     ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1),
@@ -146,21 +142,21 @@ class _Tela_PrincipalState extends State<Tela_Principal> {
                       MaterialPageRoute(
                           builder: (context) => const Utilizadorlogado()),
                     );
-                    style:
+
                     ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0),
                       ),
                     );
                   },
-                  child: const Text("Inciar Sessão")),
+                  child: const Text("Iniciar Sessão")),
             ),
             const SizedBox(
               height: 20,
             ),
-          ], //fim do children
-        ), // fim do alinhamento
-      ), //fim do body center
+          ],
+        ),
+      ),
     );
   }
 }

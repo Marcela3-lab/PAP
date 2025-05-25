@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Interface/Adicionar_obejtivo.dart';
+import 'package:learn_logs/Interface/adicionar_obejtivo.dart';
 import 'package:learn_logs/Provider/objetivo_provider.dart';
 import 'package:provider/provider.dart';
 
 class Objetivos extends StatefulWidget {
+  const Objetivos({super.key});
+
   Widget centralizartexto() {
     return Container(
         padding: const EdgeInsets.all(16.0),
@@ -26,8 +28,7 @@ class Objetivos extends StatefulWidget {
   }
 
   @override
-  _ObjetivosState createState() => _ObjetivosState();
-  // OBJETIVO------------------------------------------------------------
+  ObjetivosState createState() => ObjetivosState();
   Widget objetivo(BuildContext context, String id, String titulo, Color cor,
       Function atualizarLista, descricao, meta, tipometa) {
     return Container(
@@ -40,7 +41,7 @@ class Objetivos extends StatefulWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            color: Colors.grey.withAlpha(120),
             spreadRadius: 1,
             blurRadius: 6,
             offset: const Offset(0, 4),
@@ -93,21 +94,16 @@ class Objetivos extends StatefulWidget {
                             ),
                           ]);
                     });
-                print(descricao);
-                print(meta);
-                print(tipometa);
-                print(id);
               }),
         ],
       ),
     );
   }
-  // OBJETIVO------------------------------------------------------------
 }
 
-class _ObjetivosState extends State<Objetivos> {
+class ObjetivosState extends State<Objetivos> {
   late Future<List<Map<String, dynamic>>> lista = Future.value([]);
-
+  @override
   void initState() {
     super.initState();
     objetivocarregado();
@@ -137,7 +133,6 @@ class _ObjetivosState extends State<Objetivos> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-
             widget.centralizartexto(),
             Text(
               'Defina seus objetivos e acompanhe seu progresso!',
@@ -147,9 +142,7 @@ class _ObjetivosState extends State<Objetivos> {
                 color: Colors.grey[600],
               ),
             ),
-
             const SizedBox(height: 20),
-            // Lista de objetivos com rolagem
             Expanded(
               child: FutureBuilder<List<Map<String, dynamic>>>(
                 future: lista,
@@ -163,7 +156,6 @@ class _ObjetivosState extends State<Objetivos> {
                     return const Center(
                         child: Text("Nenhum objetivo encontrado."));
                   } else {
-                    // Dados carregados
                     final dados = snapshot.data!;
                     return ListView(
                       children: dados.map((item) {
@@ -182,7 +174,6 @@ class _ObjetivosState extends State<Objetivos> {
                 },
               ),
             ),
-            //
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
@@ -193,7 +184,7 @@ class _ObjetivosState extends State<Objetivos> {
                       borderRadius: BorderRadius.circular(10),
                     )),
                 onPressed: () async {
-                  final novo = await Navigator.push(
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const PObjetivo(),

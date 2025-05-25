@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:learn_logs/Interface/objetivos_page.dart';
 import 'package:learn_logs/Navegacao_page.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:learn_logs/Provider/Adicionarobjetivo_Provider.dart';
+import 'package:learn_logs/Provider/adicionarobjetivo_provider.dart';
 
 class PObjetivo extends StatefulWidget {
   const PObjetivo({super.key});
   @override
-  _PObjetivoState createState() => _PObjetivoState();
+  PObjetivoState createState() => PObjetivoState();
 }
 
-class _PObjetivoState extends State<PObjetivo> {
+class PObjetivoState extends State<PObjetivo> {
   final TextEditingController _titulo = TextEditingController();
 
   final TextEditingController _descricao = TextEditingController();
@@ -24,9 +22,9 @@ class _PObjetivoState extends State<PObjetivo> {
     if (cor >= 8 && cor <= 10) {
       return Colors.red.shade200;
     } else if (cor >= 1 && cor <= 4) {
-      return Colors.orange.shade200;
-    } else if (cor >= 5 && cor <= 7) {
       return Colors.green.shade200;
+    } else if (cor >= 5 && cor <= 7) {
+      return Colors.orange.shade200;
     } else {
       return Color.fromARGB(255, 255, 255, 255);
     }
@@ -73,7 +71,6 @@ class _PObjetivoState extends State<PObjetivo> {
               }).toList(),
               onChanged: (String? novotipo) {
                 setState(() {
-                  print(novotipo);
                   tipo = novotipo;
                 });
               },
@@ -121,11 +118,8 @@ class _PObjetivoState extends State<PObjetivo> {
                 ),
               ],
             ),
-
-            //PASSAR A COR PARA OUTRA TELA
-
             SizedBox(height: 0),
-            _Pergunta(_titulo, _descricao, _meta, _cor),
+            pergunta(_titulo, _descricao, _meta, _cor),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -145,34 +139,42 @@ class _PObjetivoState extends State<PObjetivo> {
                   int duracaoconver = int.tryParse(_meta.text) ?? 0;
 
                   corobjetivo(corDigitada);
+                  if (context.mounted) {
+                    bool duracaovalida = await context
+                        .read<Adicionarobjetivoprovider>()
+                        .verificarduracao(context, duracaoconver);
+                    if (context.mounted) {
+                      bool camposvalidos = await context
+                          .read<Adicionarobjetivoprovider>()
+                          .verificarcampos(context, _titulo.text,
+                              _descricao.text, _meta.text, tipo);
 
-                  bool duracaovalida = await context
-                      .read<AdicionarobjetivoProvider>()
-                      .verificarduracao(context, duracaoconver);
+                      if (context.mounted) {
+                        if (duracaovalida && camposvalidos) {
+                          context
+                              .read<Adicionarobjetivoprovider>()
+                              .adicionarobjetivo(
+                                context,
+                                _titulo.text,
+                                _descricao.text,
+                                _meta.text,
+                                tipo,
+                                _cor.text,
+                              );
 
-                  bool camposvalidos = await context
-                      .read<AdicionarobjetivoProvider>()
-                      .verificarcampos(context, _titulo.text, _descricao.text,
-                          _meta.text, tipo);
-                  if (duracaovalida && camposvalidos) {
-                    context.read<AdicionarobjetivoProvider>().adicionarobjetivo(
-                          context,
-                          _titulo.text,
-                          _descricao.text,
-                          _meta.text,
-                          tipo,
-                          _cor.text,
-                        );
-
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Navegacao(
-                          indiceInicial: 1,
-                        ),
-                      ),
-                      (Route<dynamic> route) => false,
-                    );
+                          if (!mounted) return;
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Navegacao(
+                                indiceInicial: 1,
+                              ),
+                            ),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
+                      }
+                    }
                   }
                 },
                 child: const Text('Salvar Tarefa'),
@@ -184,11 +186,8 @@ class _PObjetivoState extends State<PObjetivo> {
     );
   }
 
-  Widget _Pergunta(
-      TextEditingController titulo,
-      TextEditingController descricao,
-      TextEditingController meta,
-      TextEditingController cor) {
+  Widget pergunta(TextEditingController titulo, TextEditingController descricao,
+      TextEditingController meta, TextEditingController cor) {
     return Container(
         margin: const EdgeInsets.all(16),
         padding: const EdgeInsets.all(16),
@@ -281,7 +280,7 @@ class _PObjetivoState extends State<PObjetivo> {
                     builder: (context) => AlertDialog(
                       title: Text("Ajuda"),
                       content: Text(
-                          "🟢 1 a 4 → Cor verde\n🟡 5 a 7 → Cor amarela\n🔴 8 a 10 → Cor vermelha"),
+                          "🟢 1 a 4 → Cor verde\n🟡 5 a 7 → Cor amarela\n🔴 8 a 10 → Cor vermelha\n⚪ ≠ 1 a 10"),
                       actions: [
                         TextButton(
                           child: Text("Ok"),

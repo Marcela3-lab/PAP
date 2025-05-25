@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +10,7 @@ class Sairprovider extends ChangeNotifier {
         return AlertDialog(
           title: const Text("Apagar Conta"),
           content: const Text(
-              "Após apagar a conta será necessário se cadastrar novamente. Deseja continuar?"),
+              "Após apagar a conta será necessário registar-se novamente. Deseja continuar?"),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
@@ -32,18 +30,14 @@ class Sairprovider extends ChangeNotifier {
 
     final prefs = await SharedPreferences.getInstance();
     final int? idUsuario = prefs.getInt('id');
-    print('ID do user a ser apagado: $idUsuario');
-    bool dados;
 
-    final url = Uri.parse("http://192.168.1.187/sair.php?id_user=$idUsuario");
+    final url = Uri.parse("http://192.168.1.199/sair.php?id_user=$idUsuario");
     final response = await http.get(url);
 
-    print("body: ${response.body}");
     if (response.statusCode == 200 && response.body.isNotEmpty) {
-      dados = jsonDecode(response.body);
+      return true;
     } else {
-      print("Erro ao apagar user: ${response.statusCode}");
+      return false;
     }
-    return true;
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,18 +14,9 @@ class AdicionarProgressoProvider extends ChangeNotifier {
     String tipometa,
     String dia,
   ) async {
-    const String url = "http://192.168.1.187/Adicionar_progresso.php";
+    const String url = "http://192.168.1.199/Adicionar_progresso.php";
     final prefs = await SharedPreferences.getInstance();
     int? iduser = prefs.getInt('id');
-    print('Enviando progresso...');
-    print('objetivo: $objetivo');
-    print('progresso: $progresso');
-    print('avanco: $avanco');
-    print('tipoavanco: $tipoavanco');
-    print('meta: $meta');
-    print('tipometa: $tipometa');
-    print('dia: $dia');
-    print('id_user: $iduser');
 
     try {
       final response = await http.post(Uri.parse(url), body: {
@@ -42,51 +32,56 @@ class AdicionarProgressoProvider extends ChangeNotifier {
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         final data = jsonDecode(response.body);
 
-        if (data["status"] == "sucesso") {
-          print(response.body);
+        if (data["status"] == "sucesso") {}
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Sucesso"),
+              content: Text("Seu progresso foi adicionada com sucesso"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(()),
+                  child: Text("Ok"),
+                )
+              ],
+            ),
+          );
         }
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("Sucesso"),
-            content: Text("Seu progresso foi adicionada com sucesso"),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(()),
-                child: Text("Ok"),
-              )
-            ],
-          ),
-        );
       } else {
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Erro"),
+              content:
+                  Text("Erro ao adicionar progresso ${response.statusCode}"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Ok"),
+                )
+              ],
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Erro"),
-            content: Text("Erro ao adicionar progresso ${response.statusCode}"),
+            title: const Text("Erro"),
+            content: Text("Não foi possível conectar ao servidor. $e"),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text("Ok"),
+                child: const Text("Ok"),
               )
             ],
           ),
         );
       }
-    } catch (e) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Erro"),
-          content: Text("Não foi possível conectar ao servidor. $e"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Ok"),
-            )
-          ],
-        ),
-      );
     }
   }
 }
