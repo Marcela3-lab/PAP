@@ -1,31 +1,47 @@
-# LearnLogs
+# 📚 LearnLogs
 
-LearnLogs é um aplicativo de estudos que ajuda você a registar seu progresso de aprendizagem e organizar sua rotina de estudos de forma prática e eficiente.
+Oi, 👋 seja bem-vindo(a)!  
+**LearnLogs** é meu app de estudos criado para te ajudar a **organizar seu dia, acompanhar seu progresso e estudar de forma mais eficiente**.  
+Não é só sobre estudar — é sobre **ganhar controle da sua rotina e se sentir motivado(a)**.
 
-## Funcionalidades principais
+---
 
-A aplicação possui 5 telas principais:
+## 🚀 O que você vai encontrar por aqui
 
-1. **Calendário**  
-   Uma tela para você adicionar seus eventos diários. Embora não seja focada diretamente nos estudos, ela ajuda a organizar seu dia e criar uma rotina de estudos consistente.
+Eu organizei o app em **5 telas principais**, cada uma com um propósito:
 
-2. **Objetivos**  
-   Permite adicionar seus objetivos de estudo para acompanhar e focar no que deseja alcançar.
+1. **📅 Calendário**  
+   Aqui você pode adicionar seus eventos diários.  
+   Não é só estudo, é sobre **criar uma rotina que funcione para você**.
 
-3. **Home (Resumo do Dia)**  
-   Exibe um resumo do seu dia, incluindo tarefas pendentes, objetivos, tarefas concluídas e progresso geral.
+2. **🎯 Objetivos**  
+   Adicione seus objetivos de estudo e veja seu progresso.  
+   Vamos juntos manter o foco no que realmente importa.
 
-4. **Progresso**  
-   Aqui você pode selecionar um objetivo e visualizar uma barra de progresso que compara a duração planejada com o quanto você já completou.
+3. **🏠 Home (Resumo do Dia)**  
+   Um resumo do que você fez e do que ainda falta.  
+   Tudo de forma clara, pra você **não se perder no seu próprio dia**.
 
-5. **Dicas e Técnicas**  
-   Contém dicas de como usar o app e orientações sobre como manter uma rotina de estudos eficiente.
+4. **📊 Progresso**  
+   Selecione um objetivo e veja sua **barra de progresso**.  
+   Nada como ver **quanto você já avançou** e se sentir motivado(a) a continuar.
 
-## Funcionalidades adicionais
+5. **💡 Dicas e Técnicas**  
+   Sugestões de como usar o app e dicas para **criar hábitos de estudo que realmente funcionam**.  
 
-- Sistema de login e sessão para o usuário acessar sua conta e manter seus dados seguros.
+---
 
+## 🔐 Mais funcionalidades
 
+- Login seguro para manter seus dados protegidos  
+- Interface intuitiva e limpa, feita pra você **não perder tempo** tentando descobrir como usar  
+- Totalmente **feito para prática e aprendizado**, resultado do projeto final do 12º ano  
+
+---
+
+## ⚡ Bora testar?
+
+Se você quiser experimentar o app no seu computador ou celular com Flutter:  
 
 ```bash
 flutter pub get
