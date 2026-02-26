@@ -39,7 +39,7 @@ Eu organizei o app em **5 telas principais**, cada uma com um propósito:
 
 ---
 
-## ⚡ Bora testar?
+## ⚡ Quer testar?
 
 Se você quiser experimentar o app no seu computador ou celular com Flutter:  
 
